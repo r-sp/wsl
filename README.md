@@ -25,7 +25,7 @@ See: [How to install Linux on Windows with WSL](https://learn.microsoft.com/en-u
    ```sh
    wsl --set-default-version 2
    ```
-3. Install Debian
+3. Install Debian.
    ```sh
    wsl --install Debian
    ```
@@ -44,7 +44,10 @@ See: [How to install Linux on Windows with WSL](https://learn.microsoft.com/en-u
    sudo editor /etc/wsl.conf
    ```
    > You could also use `sudo nano /etc/wsl.conf`.
-7. Exit to PowerShell by issuing the command `logout`.
+7. Exit to PowerShell.
+   ```sh
+   logout
+   ```
 8. Shut down your Debian instance from PowerShell.
    ```sh
    wsl --shutdown -d Debian
@@ -138,54 +141,97 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
     pacman -Syu base base-devel git nano wget reflector rsync
     ```
 
-16. Back up the existing mirror list, in case anything goes weird.
-    ```sh
-    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-    ```
-    Get a list of [reflector](https://wiki.archlinux.org/title/Reflector) countries and codes.
-    ```sh
-    reflector --list-countries
-    ```
-    Set your mirror list by your country or nearest.
-    ```sh
-    reflector -c us -f 12 -l 10 --save /etc/pacman.d/mirrorlist
-    ```
-    > This will set mirror list to US as fastest that meet the order criteria and limit the list to most recently synchronized servers. [See help message](https://xyne.dev/projects/reflector/).
-17. Setup locale or language.
-    ```sh
-    nano /etc/locate.gen
-    ```
-    Uncomment selected language, in case it does not appears any languages you can export your locale. `en_US.UTF-8`.
-    
-    Generate the locale config in the `etc/` directory.
-    ```sh
-    locale-gen
-    echo LANG=en_US.UTF-8 > /etc/locale.conf
-    export LANG=en_US.UTF-8
-    ```
+16. Set up mirror list.
+    - Back up the existing mirror list, in case anything goes weird.
+      ```sh
+      cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+      ```
+    - Get a list of [reflector](https://wiki.archlinux.org/title/Reflector) countries and codes.
+      ```sh
+      reflector --list-countries
+      ```
+    - Set your mirror list by your country or nearest.
+      ```sh
+      reflector -c us -f 12 -l 10 --save /etc/pacman.d/mirrorlist
+      ```
+      > This will set mirror list to US as fastest that meet the order criteria and limit the list to most recently synchronized servers. See: [help message](https://xyne.dev/projects/reflector/).
+17. Set up locale or language.
+    - Uncomment selected language, `en_US.UTF-8`.
+      ```sh
+      nano /etc/locate.gen
+      ```
+    - Generate the locale config in the `etc/` directory.
+      ```sh
+      locale-gen
+      echo LANG=en_US.UTF-8 > /etc/locale.conf
+      export LANG=en_US.UTF-8
+      ```
 18. Creating user root and local.
-    ```sh
-    passwd
-    ```
-    > This will create password for your root.
-    ```sh
-    useradd -m <username>
-    ```
-    > This will create local user.
-    ```sh
-    passwd <username>
-    ```
-    > This will create password for your local user.
-    ```sh
-    usermod -aG wheel <username>
-    ```
-    > This will gain administrative privileges to your local user.
-    ```sh
-    EDITOR=nano visudo
-    ```
-    > Scroll down and uncomment the `%whell ALL=(ALL:ALL) ALL`. Save the document using CTRL+O and exit using CTRL+X.
+    - Create password for your root.
+      ```sh
+      passwd
+      ```
+    - Create local user.
+      ```sh
+       useradd -m <username>
+      ```
+    - Create password for your local user.
+      ```sh
+      passwd <username>
+      ```
+    - Gain administrative privileges to your local user.
+      ```sh
+      usermod -aG wheel <username>
+      ```
+    - Scroll down and uncomment the `%whell ALL=(ALL:ALL) ALL`.
+      ```sh
+      EDITOR=nano visudo
+      ```
+      Save the document using CTRL+O and exit using CTRL+X.
 19. Shut down your Arch Linux instance.
     ```sh
     wsl.exe --shutdown ArchLinux
     ```
-Source: [Arch Linux Distributions for WSL2](https://itsfoss.com/arch-linux-windows-subsystem/).
+20. Start Arch Linux instance with local user.
+    ```sh
+    wsl ~ -d ArchLinux -u <username>
+    ```
+
+See: [Arch Linux Distributions for WSL2](https://itsfoss.com/arch-linux-windows-subsystem/).
+
+## Install `zsh` for WSL instances
+
+1. Install with sudo.
+   ```sh
+   # Debian
+   sudo apt install zsh
+
+   # Arch Linux
+   sudo pacman -S zsh
+   ```
+2. Configuring `$PATH`, open nano with following command `nano ~/.zshenv`.
+   ```sh
+   typeset -U path PATH
+   path=(~/.local/bin $path)
+   export PATH
+   ```
+3. Use modern completion system, open nano with following command `nano ~/.zshrc`
+   ```sh
+   autoload -Uz compinit && compinit
+   ```
+4. Initial configuration.
+   ```sh
+   zsh
+   ```
+   > This will install and load all plugins included in the `~/.zshrc` file.
+5. Make Zsh as your default shell.
+   ```sh
+   chsh -s /bin/zsh
+   ```
+6. Reload Zsh after changes.
+   ```sh
+   source ~/.zshrc
+   ```
+See: 
+- [Zsh - Debian Wiki](https://wiki.debian.org/Zsh)
+- [Zsh - ArchWiki](https://wiki.archlinux.org/title/Zsh)
