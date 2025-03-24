@@ -16,6 +16,7 @@ This guide shows you how to set up a robust development environment on Windows 1
    ```sh
    wsl --update
    ```
+
 See: [How to install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ## Install Debian Linux
@@ -62,9 +63,11 @@ See: [How to install Linux on Windows with WSL](https://learn.microsoft.com/en-u
     sudo apt update
     sudo apt upgrade
     ```
+
 See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux)
 
 ## Install Arch Linux
+
 1. Find the [`archlinux-bootstrap-*.tar.zst`](https://archlinux.org/download/) via appropriate mirror links.
 2. Open your Debian instance and download the Arch Linux Tar file.
    ```sh
@@ -102,11 +105,11 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
    sudo mv root.tar.gz /mnt/c/Users/<username>/Downloads/
    ```
    > This will move the tar file into your Downloads folder.
-9. Shut down your running Debian instance from Powershell.
+9. Shut down your running Debian instance from PowerShell.
    ```sh
    wsl --shutdown Debian
    ```
-10. Import `root.tar.gz` from Powershell in administrator mode.
+10. Import `root.tar.gz` from PowerShell in administrator mode.
     ```sh
     wsl --import <Distro name> <Location to where imported> <Location of the tar file>
     ```
@@ -119,7 +122,7 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
     ```sh
     wsl -l -v
     ```
-12. Start your Arch Linux instance.
+12. Start your Arch Linux instance from PowerShell.
     ```sh
     wsl -d ArchLinux
     ```
@@ -173,7 +176,7 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
       ```
     - Create local user.
       ```sh
-       useradd -m <username>
+      useradd -m <username>
       ```
     - Create password for your local user.
       ```sh
@@ -188,7 +191,7 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
       EDITOR=nano visudo
       ```
       Save the document using CTRL+O and exit using CTRL+X.
-19. Shut down your Arch Linux instance.
+19. Shut down your running Arch Linux instance.
     ```sh
     wsl.exe --shutdown ArchLinux
     ```
@@ -199,7 +202,7 @@ See: [Debian Distributions for WSL2](https://wiki.debian.org/InstallingDebianOn/
 
 See: [Arch Linux Distributions for WSL2](https://itsfoss.com/arch-linux-windows-subsystem/).
 
-## Install `zsh` for WSL instances
+## Install Zsh for WSL instances
 
 1. Install with sudo.
    ```sh
@@ -215,7 +218,7 @@ See: [Arch Linux Distributions for WSL2](https://itsfoss.com/arch-linux-windows-
    path=(~/.local/bin $path)
    export PATH
    ```
-3. Use modern completion system, open nano with following command `nano ~/.zshrc`
+3. Use modern completion system, open nano with following command `nano ~/.zshrc`.
    ```sh
    autoload -Uz compinit && compinit
    ```
@@ -232,6 +235,40 @@ See: [Arch Linux Distributions for WSL2](https://itsfoss.com/arch-linux-windows-
    ```sh
    source ~/.zshrc
    ```
+
 See: 
 - [Zsh - Debian Wiki](https://wiki.debian.org/Zsh)
 - [Zsh - ArchWiki](https://wiki.archlinux.org/title/Zsh)
+
+## Install Starship for PowerShell and WSL instances
+
+1. Install with sudo.
+   ```sh
+   # PowerShell using widget
+   winget install starship
+
+   # Debian
+   sudo apt install starship
+
+   # Arch Linux
+   sudo pacman -S starship
+
+   # Alternative with shell
+   curl -sS https://starship.rs/install.sh | sh
+   ```
+2. Initial configuration.
+   - PowerShell
+     ```sh
+     # ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+     Invoke-Expression (&starship init PowerShell)
+     ```
+     > Open new tab PowerShell to see the effect.
+   - Zsh
+     ```sh
+     # ~/.zshrc
+     eval "$(starship init zsh)"
+     ```
+     > Reload the config by `source ~/.zshrc` to see the effect.
+3. Add the following command to the end of the file.
+
+See: [Guide - Starship](https://starship.rs/guide/).
