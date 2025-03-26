@@ -45,3 +45,6 @@ Set-PSReadLineKeyHandler -Key Tab -Function Complete
 
 # winget install starship
 Invoke-Expression (&starship init powershell)
+
+# winget install zoxide
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
