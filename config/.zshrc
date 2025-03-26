@@ -78,7 +78,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # init standalone pnpm
-export PNPM_HOME="/home/rsp/.local/share/pnpm"
+export PNPM_HOME="/home/<username>/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -94,3 +94,9 @@ alias pd="pnpm run dev"
 
 # init starship
 eval "$(starship init zsh)"
+
+# init zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
+# init fuzzy finder
+source <(fzf --zsh)

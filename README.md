@@ -1,6 +1,6 @@
 # Windows Subsystem for Linux (WSL) - Guidance
 
-This guide shows you how to set up a robust development environment on Windows 11 using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), featuring [Debian](https://www.debian.org/distrib/) and [Arch Linux](https://archlinux.org/download/). Enjoy the best of both Windows and Linux, with [zsh](https://en.wikipedia.org/wiki/Z_shell) and [starship](https://starship.rs/) for a streamlined terminal experience.
+This guide shows you how to set up a robust development environment on Windows 11 using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), featuring [Debian](https://www.debian.org/distrib/) and [Arch Linux](https://archlinux.org/download/). Enjoy the best of both Windows and Linux, with [zsh](https://en.wikipedia.org/wiki/Z_shell), [starship](https://starship.rs/), [fzf](https://github.com/junegunn/fzf) and [zoxide](https://github.com/ajeetdsouza/zoxide) for a streamlined terminal experience.
 
 ## Prerequisites
 
@@ -272,3 +272,53 @@ See:
 3. Add the following command to the end of the file.
 
 See: [Guide - Starship](https://starship.rs/guide/).
+
+## Install Fuzzy finder for WSL instances
+
+1. Install with sudo.
+   ```sh
+   # Debian
+   sudo apt install fzf
+
+   # Arch Linux
+   sudo pacman -S zoxide
+   ```
+2. Initial configuration.
+   ```sh
+   # ~/.zshrc
+   source <(fzf --zsh)
+   ```
+   > Reload the config by `source ~/.zshrc` to see the effect.
+3. Add the following command to the end of the file.
+
+See: [Guide - fzf](https://github.com/junegunn/fzf).
+
+## Install Zoxide for PowerShell and WSL instances
+
+1. Install with sudo.
+   ```sh
+   # PowerShell using widget
+   winget install zoxide
+
+   # Debian
+   sudo apt install zoxide
+
+   # Arch Linux
+   sudo pacman -S zoxide
+   ```
+2. Initial configuration.
+   - PowerShell
+     ```sh
+     # ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1                                                                                              
+     Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+     ```
+     > Open new tab PowerShell to see the effect.
+   - Zsh
+     ```sh
+     # ~/.zshrc
+     eval "$(zoxide init --cmd cd zsh)"
+     ```
+     > Reload the config by `source ~/.zshrc` to see the effect.
+3. Add the following command to the end of the file.
+
+See: [Guide - Zoxide](https://github.com/ajeetdsouza/zoxide).
