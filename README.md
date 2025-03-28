@@ -309,7 +309,7 @@ See: [Guide - fzf](https://github.com/junegunn/fzf).
 2. Initial configuration.
    - PowerShell
      ```sh
-     # ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1                                                                                              
+     # ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
      Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
      ```
      > Open new tab PowerShell to see the effect.
