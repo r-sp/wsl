@@ -27,8 +27,8 @@ alias po="pnpm outdated"
 alias pv="pnpm env"
 
 # Helper
-alias q="bat ~/.config/wsl/docs/query.md"
-alias qc="bat ~/.config/wsl/docs/command.md"
+alias q="bat ~/.config/wsl/docs/shortcut.md"
+alias qc="bat ~/.config/wsl/docs/linux.md"
 alias qa="bat ~/.config/wsl/docs/arch.md"
 alias qd="bat ~/.config/wsl/docs/debian.md"
 alias vc="bat --color=always"
