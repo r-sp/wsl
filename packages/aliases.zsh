@@ -29,8 +29,8 @@ alias pv="pnpm env"
 # Helper
 alias q="bat ~/.config/wsl/docs/shortcut.md"
 alias qc="bat ~/.config/wsl/docs/linux.md"
-alias qa="bat ~/.config/wsl/docs/arch.md"
-alias qd="bat ~/.config/wsl/docs/debian.md"
+alias qa="bat ~/.config/wsl/docs/pacman.md"
+alias qd="bat ~/.config/wsl/docs/apt.md"
 alias vc="bat --color=always"
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'

@@ -32,6 +32,6 @@ alias pv="pnpm env"                          # Manages the Node.js environment
 # Helper
 alias q="bat ~/.config/wsl/docs/shortcut.md" # Show quick command
 alias qc="bat ~/.config/wsl/docs/linux.md"   # Show quick command for Linux
-alias qa="bat ~/.config/wsl/docs/arch.md"    # Show quick command for Pacman
-alias qd="bat ~/.config/wsl/docs/debian.md"  # Show quick command for Apt
+alias qa="bat ~/.config/wsl/docs/pacman.md"  # Show quick command for Pacman
+alias qd="bat ~/.config/wsl/docs/apt.md"     # Show quick command for Apt
 ``
